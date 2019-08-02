@@ -1,7 +1,6 @@
 <template>
   <div>
-    这个是首页
-
+    welcome
   </div>
 </template>
 
@@ -9,7 +8,6 @@
 export default {
 
 }
-
 </script>
 
 <style scoped>
