@@ -1,6 +1,9 @@
 <template>
   <div>
-    welcome
+    <div class="pic" style="text-align: center">
+      <img src="../../assets/images/welcome.jpg" >
+    </div>
+
   </div>
 </template>
 
@@ -10,6 +13,5 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
 </style>

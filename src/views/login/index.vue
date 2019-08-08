@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
 
   data () {
@@ -31,8 +32,8 @@ export default {
     }
     return {
       form: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       loginRules: {
         mobile: [
@@ -48,15 +49,23 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(async (valid) => {
         if (valid) {
-          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.form)
-            .then((result) => {
-              this.$router.push('/')
-            })
-            .catch(() => {
-              this.$message.error('错了哦，这是一条错误消息')
-            })
+          try {
+            const { data: { data } } = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.form)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('错了哦，这是个错误消息')
+          }
+
+          // .then((result) => {
+          //   store.setUser(result.data.data)
+          //   this.$router.push('/')
+          // })
+          // .catch(() => {
+          //   this.$message.error('错了哦，这是一条错误消息')
+          // })
         }
       })
     }
@@ -84,7 +93,7 @@ export default {
 
     }
     .code{
-      width: 236px;
+      width: 230px;
       margin-right: 10px;
     }
     .login-button{
